@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#061a36">
+<meta name="description" content="Website resmi kelas X RPL 2">
+<title>X RPL 2 — Ocean Class</title>
+
+<style>
+:root {
+  --navy: #061a36;
+  --blue: #087ec4;
+  --cyan: #43d9f5;
+  --light: #eaf7ff;
+  --white: #ffffff;
+  --text: #102b4c;
+  --muted: #63809b;
+  --card: rgba(255,255,255,.09);
+  --line: rgba(91,204,255,.22);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 85px; }
+body {
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  background: var(--navy);
+  color: var(--white);
+  line-height: 1.65;
+}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+.container { width: min(1120px, 90%); margin: auto; }
+
+/* NAVIGASI */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(4,20,45,.91);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(14px);
+}
+nav {
+  min-height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; }
+.logo-icon { font-size: 30px; color: var(--cyan); }
+.nav-links { display: flex; align-items: center; gap: 20px; }
+.nav-links a { font-size: 13px; color: #c4d9ef; transition: .2s; }
+.nav-links a:hover { color: var(--cyan); }
+.menu-btn {
+  display: none;
+  color: white;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 6px 11px;
+}
+
+/* HERO LAUT */
+.hero {
+  min-height: 470px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background:
+    radial-gradient(ellipse at 75% 0%, #087eae 0%, transparent 43%),
+    radial-gradient(ellipse at 15% 85%, #075a94 0%, transparent 48%),
+    linear-gradient(140deg,#061a36,#073e70 55%,#04152d);
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .3;
+  background: repeating-linear-gradient(
+    110deg, transparent 0 100px, #75eaff 102px, transparent 104px 180px
+  );
+  animation: water 12s linear infinite;
+}
+.hero-content { position: relative; z-index: 2; padding: 75px 0; max-width: 650px; }
+.eyebrow { color: var(--cyan); letter-spacing: 2px; font-size: 12px; font-weight: 800; }
+.hero h1 { font-size: clamp(48px,8vw,88px); line-height: 1.05; margin: 14px 0; letter-spacing: -3px; }
+.gradient-text {
+  background: linear-gradient(90deg,#fff,#51e1ff,#65a9ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero p { max-width: 470px; color: #d0e8fa; font-size: 16px; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 25px; }
+.btn {
+  display: inline-block;
+  padding: 11px 19px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 700;
+  border: 1px solid var(--cyan);
+  background: linear-gradient(100deg,#0a92d0,#0870b5);
+  color: white;
+  transition: transform .2s, box-shadow .2s;
+}
+.btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px #10bce533; }
+.btn-outline { background: transparent; }
+.sea-art {
+  position: absolute;
+  right: 7%;
+  top: 20%;
+  font-size: clamp(100px,18vw,205px);
+  opacity: .8;
+  filter: drop-shadow(0 0 25px #29d6ff44);
+  animation: float 5s ease-in-out infinite;
+  user-select: none;
+}
+.bubble {
+  position: absolute;
+  bottom: -25px;
+  width: 9px; height: 9px;
+  border: 1px solid #9beaff;
+  border-radius: 50%;
+  opacity: .65;
+  animation: rise 9s linear infinite;
+}
+.bubble:nth-child(2) { left: 15%; animation-delay: 2s; }
+.bubble:nth-child(3) { left: 43%; animation-delay: 4s; width: 14px; height: 14px; }
+.bubble:nth-child(4) { left: 68%; animation-delay: 1s; }
+.bubble:nth-child(5) { left: 85%; animation-delay: 6s; width: 15px; height: 15px; }
+
+/* BAGIAN UMUM */
+section { padding: 75px 0; }
+.section-heading { margin-bottom: 30px; }
+.section-heading .eyebrow { margin-bottom: 5px; display: block; }
+.section-heading h2 { font-size: clamp(25px,4vw,35px); line-height: 1.25; }
+.section-heading p { color: #b4cce2; margin-top: 8px; font-size: 14px; }
+.dark-section { background: linear-gradient(160deg,#081e3d,#052b4b); }
+.light-section { background: var(--light); color: var(--text); }
+.light-section .section-heading p { color: var(--muted); }
+.grid { display: grid; gap: 20px; }
+.two-col { grid-template-columns: repeat(2,minmax(0,1fr)); }
+.card {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 24px;
+  background: var(--card);
+}
+.light-section .card { background: white; border-color: #d8eaff; }
+.card h3 { font-size: 17px; margin-bottom: 9px; }
+.muted { color: #b4cce2; font-size: 14px; }
+.light-section .muted { color: var(--muted); }
+.pill {
+  display: inline-block;
+  font-size: 11px;
+  border-radius: 20px;
+  padding: 4px 10px;
+  background: #0e91c526;
+  color: var(--cyan);
+  margin-bottom: 12px;
+}
+.light-section .pill { color: #087db8; background: #e4f5ff; }
+
+/* PROFIL */
+.profile-list { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 24px; }
+.profile-item { border-left: 2px solid var(--cyan); padding-left: 12px; }
+.profile-item small { display: block; color: #9dbbd5; font-size: 11px; }
+.profile-item strong { font-size: 13px; }
+
+/* ANGGOTA */
+.members { grid-template-columns: repeat(4,minmax(0,1fr)); }
+.member { text-align: center; transition: transform .25s; }
+.member:hover { transform: translateY(-5px); }
+.avatar {
+  width: 86px; height: 86px; margin: 0 auto 12px;
+  border-radius: 50%; object-fit: cover;
+  border: 3px solid #55dfff;
+  background: #0d4773;
+}
+.member h3 { font-size: 14px; margin: 0; }
+.member p { color: var(--muted); font-size: 12px; margin-top: 3px; }
+
+/* JADWAL */
+.table-wrap { overflow-x: auto; border-radius: 12px; }
+table { border-collapse: collapse; width: 100%; min-width: 480px; font-size: 13px; }
+th, td { padding: 13px 12px; text-align: left; border-bottom: 1px solid #dceafa; }
+th { background: #0a5792; color: rgb(255, 255, 255); }
+td { background: #0d3358; }
+tr:hover td { background: #255e81; }
+
+/* GALERI */
+.gallery { grid-template-columns: repeat(3,minmax(0,1fr)); }
+.gallery-item {
+  border-radius: 14px; overflow: hidden;
+  background: #0d3358; border: 1px solid var(--line);
+  transition: transform .25s;
+}
+.gallery-item:hover { transform: translateY(-4px); }
+.gallery-image {
+  min-height: 135px; display: grid; place-items: center;
+  font-size: 48px;
+  background: linear-gradient(140deg,#0c5684,#2a4979);
+}
+.gallery-info { padding: 14px; }
+.gallery-info h3 { font-size: 14px; }
+.gallery-info p { font-size: 12px; color: #b4cce2; }
+
+/* STRUKTUR */
+.org { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.org-leader {
+  border: 1px solid var(--cyan); border-radius: 12px;
+  padding: 15px 28px; text-align: center;
+  background: #0c3e65;
+}
+.org-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; width: 100%; }
+.org-member { border: 1px solid var(--line); border-radius: 12px; padding: 14px 8px; text-align: center; }
+.org-member strong { display: block; font-size: 12px; }
+.org-member span { font-size: 11px; color: #a9c5dd; }
+
+/* PENGUMUMAN */
+.announcement { display: flex; gap: 14px; padding: 17px 0; border-bottom: 1px solid var(--line); }
+.announcement:last-child { border: 0; }
+.announcement-icon { font-size: 23px; }
+.announcement h3 { font-size: 14px; }
+.announcement p { color: #b4cce2; font-size: 12px; }
+.announcement time { color: var(--cyan); font-size: 11px; }
+
+/* FOOTER */
+footer { padding: 28px 0; border-top: 1px solid var(--line); background: #041328; }
+.footer-row { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+footer p { color: #a8bfd4; font-size: 12px; }
+.back-top {
+  position: fixed; bottom: 20px; right: 20px;
+  width: 43px; height: 43px; border: 0;
+  border-radius: 50%; background: #0989c9; color: white;
+  box-shadow: 0 5px 20px #0004; z-index: 90;
+}
+
+/* ANIMASI */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s, transform .65s; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+@keyframes float { 0%,100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-18px) rotate(3deg); } }
+@keyframes rise { from { transform: translateY(0); } to { transform: translateY(-550px); opacity: 0; } }
+@keyframes water { from { transform: translateX(-50px); } to { transform: translateX(50px); } }
+
+@media (max-width: 800px) {
+  .nav-links {
+    display: none; position: absolute; top: 69px; left: 0; right: 0;
+    padding: 20px 5%; background: #061a36;
+    flex-direction: column; align-items: flex-start; gap: 17px;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-links.open { display: flex; }
+  .menu-btn { display: block; }
+  .sea-art { right: 0; top: 10%; opacity: .22; }
+  .hero-content { padding: 75px 0; }
+  .two-col { grid-template-columns: 1fr; }
+  .members { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .gallery { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .org-row { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 430px) {
+  section { padding: 52px 0; }
+  .container { width: 92%; }
+  .hero h1 { letter-spacing: -2px; }
+  .profile-list { grid-template-columns: 1fr; }
+  .gallery { grid-template-columns: 1fr; }
+  .card { padding: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+/* Foto bisa diklik */
+.gallery-item img {
+  cursor: zoom-in;
+}
+
+/* Tampilan foto besar */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.9);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.lightbox.active {
+  display: flex;
+}
+
+.lightbox img {
+  max-width: 95%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.lightbox .close {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  color: white;
+  font-size: 36px;
+  cursor: pointer;
+}
+
+/* Smooth lightbox animation */
+.lightbox {
+  display: flex;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0);
+  transition:
+    opacity 0.45s ease,
+    background 0.45s ease,
+    visibility 0s linear 0.45s;
+}
+
+.lightbox.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  background: rgba(0, 0, 0, 0.92);
+  transition:
+    opacity 0.45s ease,
+    background 0.45s ease,
+    visibility 0s;
+}
+
+.lightbox img {
+  opacity: 0;
+  transform: scale(0.92) translateY(8px);
+  transition:
+    opacity 0.45s ease,
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity;
+}
+
+.lightbox.active img {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.lightbox .close {
+  opacity: 0;
+  transform: translateY(-8px);
+  transition:
+    opacity 0.35s ease,
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lightbox.active .close {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Foto pada galeri */
+.gallery-item img {
+  cursor: zoom-in;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.gallery-item img:hover {
+  transform: scale(1.025);
+}
+/* Efek saat kursor diarahkan ke foto galeri */
+.gallery-item img {
+  transition: transform 0.3s ease, filter 0.3s ease;
+  cursor: zoom-in;
+}
+
+.gallery-item img:hover {
+  transform: scale(1.04);
+  filter: brightness(1.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox,
+  .lightbox img,
+  .lightbox .close,
+  .gallery-item img {
+    transition: none;
+  }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <nav class="container">
+    <a class="logo" href="#beranda"><span class="logo-icon">〰</span> X RPL 2</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Buka menu" aria-expanded="false">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#beranda">Beranda</a>
+      <a href="#profil">Profil</a>
+      <a href="#anggota">Anggota</a>
+      <a href="#jadwal">Jadwal</a>
+      <a href="#galeri">Galeri</a>
+      <a href="#struktur">Struktur</a>
+      <a href="#pengumuman">Pengumuman</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" id="beranda">
+    <span class="bubble" style="left:8%"></span>
+    <span class="bubble"></span><span class="bubble"></span>
+    <span class="bubble"></span><span class="bubble"></span>
+    <div class="container">
+      <div class="hero-content">
+        <span class="eyebrow">WELCOME TO OUR LITTLE OCEAN</span>
+        <h1><span class="gradient-text">X RPL 2</span></h1>
+        <h3>Satu Kelas, Satu Tujuan, Banyak Cerita.</h3>
+        <p>Kami belajar, berkembang, dan berproses bersama. Mengubah ide menjadi karya melalui teknologi, kreativitas, dan kebersamaan.</p>
+        <div class="actions">
+          <a class="btn" href="#profil">Jelajahi Kelas ↗</a>
+          <a class="btn btn-outline" href="#anggota">Kenali Kami</a>
+        </div>
+      </div>
+    </div>
+    <div class="sea-art" aria-hidden="true">🐋</div>
+  </section>
+
+  <section class="dark-section" id="profil">
+    <div class="container grid two-col">
+      <div class="reveal">
+        <span class="eyebrow">01 — ABOUT US</span>
+        <div class="section-heading">
+          <h2>Profil Kelas</h2>
+          <p>Kenalan lebih dekat dengan keluarga kecil kami.</p>
+        </div>
+        <p class="muted">X RPL 2 adalah kelas Rekayasa Perangkat Lunak yang bersemangat mempelajari dunia pemrograman, teknologi, dan pengembangan aplikasi. Kami percaya bahwa setiap orang punya potensi untuk menciptakan sesuatu yang hebat.</p>
+        <div class="profile-list">
+          <div class="profile-item"><small>Kelas</small><strong>X RPL 2</strong></div>
+          <div class="profile-item"><small>Tahun Ajaran</small><strong>2026/2027</strong></div>
+          <div class="profile-item"><small>Wali Kelas</small><strong>RESA YULIA PUSPITA, M.PD,,Gr</strong></div>
+        </div>
+      </div>
+      <div class="card reveal">
+        <span class="pill">OUR PHILOSOPHY</span>
+        <h3>🌊 Seperti Laut, Kita Bertumbuh</h3>
+        <p class="muted">Laut mengajarkan bahwa keindahan tercipta dari banyak hal yang berbeda. Begitu juga kelas kita: berbeda karakter, satu tujuan, dan saling menguatkan.</p>
+        <div style="font-size:40px;margin-top:18px">🐠 🪸 🐚 🐬</div>
+        <p style="color:var(--cyan);margin-top:10px;font-weight:700">Keep Coding.Keep Growing.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="light-section" id="anggota">
+    <div class="container">
+      <div class="section-heading reveal">
+        <span class="eyebrow">02 — OUR PEOPLE</span>
+        <h2>Anggota Kelas</h2>
+        <p>Teman seperjuangan dalam belajar dan menciptakan karya.</p>
+      </div>
+      <div class="grid members" id="memberGrid"></div>
+      <p style="font-size:12px;color:var(--muted);margin-top:18px">Foto dan nama di bawah adalah contoh. Ganti dengan data anggota kelasmu.</p>
+    </div>
+  </section>
+
+  <section class="dark-section" id="jadwal">
+    <div class="container">
+      <div class="section-heading reveal">
+        <span class="eyebrow">03 — OUR ROUTINE</span>
+        <h2>Jadwal Pelajaran</h2>
+        <p>Atur waktu, siapkan semangat, dan jangan lupa belajar.</p>
+      </div>
+      <div class="card reveal">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Hari</th><th>Waktu</th><th>Mata Pelajaran</th></tr></thead>
+            <tbody id="scheduleBody"></tbody>
+          </table>
+        </div>
+        <p class="muted" style="margin-top:14px;font-size:12px">Jadwal berikut hanya contoh. Sesuaikan dengan jadwal resmi kelas.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="light-section" id="galeri">
+    <div class="container">
+      <div class="section-heading reveal">
+        <span class="eyebrow">04 — OUR MEMORIES</span>
+        <h2>Galeri Kegiatan</h2>
+        <p>Setiap momen punya cerita yang layak dikenang.</p>
+      </div>
+      
+<div class="grid gallery" id="galleryGrid"></div>
+
+<div class="grid gallery" style="margin-top:20px">
+  <article class="gallery-item reveal">
+    <video controls preload="metadata" playsinline
+      style="width:100%;display:block">
+      <source src="galeri/kegiatan1.mp4" type="video/mp4">
+      Browser tidak mendukung video.
+    </video>
+    <div class="gallery-info">
+      <h3>Kegiatan Kelas</h3>
+      <p>Kenangan X RPL 2 🌊</p>
+    </div>
+  </article>
+</div>
+      <p style="font-size:12px;color:var(--muted);margin-top:15px">Ganti gambar emoji dengan foto kegiatan kelas asli jika tersedia.</p>
+    </div>
+  </section>
+
+  <section class="dark-section" id="struktur">
+    <div class="container">
+      <div class="section-heading reveal">
+        <span class="eyebrow">05 — OUR TEAM</span>
+        <h2>Struktur Organisasi</h2>
+        <p>Bersama menjalankan kelas dengan tanggung jawab.</p>
+      </div>
+      <div class="card reveal">
+        <div class="org">
+          <div class="org-leader">
+            <div style="font-size:24px">👨‍🏫</div>
+            <strong>Wali Kelas</strong>
+            <p class="muted">RESA YULIA PUSPITA, M.PD,,Gr</p>
+          </div>
+          <div style="color:var(--cyan)">│</div>
+          <div class="org-row">
+            <div class="org-member">👑<strong>Ketua Kelas</strong><span>Rizki Pratama</span></div>
+            <div class="org-member">🤝<strong>Wakil Ketua</strong><span>Muhamad Aldi Saputra</span></div>
+            <div class="org-member">📝<strong>Sekretaris</strong><span>Nadia Nur Alfiani</span></div>
+            <div class="org-member">💰<strong>Bendahara</strong><span>Aulia octamara Rusuma</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark-section" id="pengumuman">
+    <div class="container">
+      <div class="section-heading reveal">
+        <span class="eyebrow">06 — CLASS UPDATE</span>
+        <h2>Pengumuman Kelas</h2>
+        <p>Informasi penting agar tidak ada yang tertinggal.</p>
+      </div>
+      <div class="card reveal" id="announcementList"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-row">
+    <a class="logo" href="#beranda"><span class="logo-icon">〰</span>X RPL 2</a>
+    <p>Keep Coding • Keep Growing 🌊</p>
+    <p>© <span id="year"></span> Keluarga X RPL 2</p>
+  </div>
+</footer>
+
+<button class="back-top" id="backTop" aria-label="Kembali ke atas" hidden>↑</button>
+
+<script>
+
+const members = [
+  { name: "Rizki Pratama", role: "Ketua Kelas", photo: "" },
+  { name: "Muhamad Aldi Saputra", role: "Wakil Ketua", photo: "" },
+  { name: "Nadia Nur Alfiani", role: "Sekretaris", photo: "" },
+  { name: "Aulia Octamara Rusuma", role: "Bendahara", photo: "" },
+  { name: "Abizar Pratama Putra", role: "Anggota", photo: "" },
+  { name: "Ahmad Fahrur Rozi", role: "Anggota", photo: "" },
+  { name: "Aldo Candra Saputra", role: "Anggota", photo: "" },
+  { name: "Amiratu Nisa", role: "Anggota", photo: "" },
+  { name: "Anggi Pratiwi Saputri", role: "Anggota", photo: ""},
+  { name: "Anisah Nurhasanah", role: "Anggota", photo: "" },
+  { name: "Anisah", role: "Anggota", photo: "" },
+  { name: "Azka Maulana Pratama", role: "Anggota",photo: ""},
+  { name: "Beni Satrio",role: "Anggota", photo: ""},
+  { name: "Cahya Khairunisa", role: "Anggota",photo: ""},
+  { name: "Dewi Nadiatul Haq", role: "Anggota",photo: ""},
+  { name: "Efan Saputra", role: "Anggota",photo: ""},
+  { name: "Elza Pebriyani Velisa", role: "Anggota", photo: ""},
+  { name: "Fakhri Daffa Pratama", role: "Anggota", photo: ""},
+  { name: "Gea ananda", role: "Anggota", photo: ""},
+  { name: "Harum Komalasari", role: "Anggota", photo: ""},
+  { name: "Irsyad Rizki Pratama", role: "Anggota", photo: ""},
+  { name: "Marccel Dery Laksana", role: "Anggota", photo: ""},
+  { name: "Marsya", role: "Anggota", poto: ""},
+  { name: "Meysa Alin Yana", role: "Aggota", photo: ""},
+  { name: "Mila Artika Sari", role: "Angota", photo: ""},
+  { name: "Muhamad Arif Mardiansyah", role: "Anggota", photo: ""},
+  { name: "Muhamad Aldi Saputra", role: "Anggota", photo: ""},
+  { name: "Muhamad Rifki Fuadi", role: "Anggota", photo: ""},
+  { name: "Nandana Azmi Rafi", role: "Anggota", photo: "images/Nandana Azmi Rafi.jpg"},
+  { name: "Nayla Firly Anindhita", role: "Anggota", photo: ""},
+  { name: "Zahrotus Syifa", role: "Anggota", photo: ""},
+
+];
+
+const schedules = [
+  ["Senin", "08.00–10.00", "Dasar-Dasar Keahlian RPL"],
+  ["", "10.15–10.55", "Sejarah"],
+  ["", "10.55–11.35", "Bahasa Lampung"],
+  ["", "11.35–14.25", "Koding dan Kecerdasan Artifisial"],
+  ["", "14.25–15.45", "Informatika"],
+
+  ["Selasa", "07.30–10.45", "Bahasa Inggris"],
+  ["", "10.45–12.15", "Seni Budaya"],
+  ["", "12.45–15.45", "IPAS"],
+
+  ["Rabu", "07.30–09.45", "PJOK"],
+  ["", "10.00–12.15", "Dasar-Dasar Keahlian RPL"],
+  ["", "12.15–14.15", "PKN"],
+  ["", "14.15–15.45", "IPAS"],
+
+  ["Kamis", "07.30–12.15", "Dasar-Dasar Keahlian RPL"],
+  ["", "12.45–15.45", "Bahasa Indonesia"],
+
+  ["Jumat", "08.00–10.55", "Matematika"],
+  ["", "10.55–12.15", "Informatika"],
+  ["", "13.05–13.45", "PAI"],
+  ["", "13.45–15.45", "PAK"]
+];
+
+
+const galleries = [
+  { title: "Hari Batik Nasional", date: "02-10-26", image: "galeri/Kegiatan1.jpg" },
+  { title: "Penanaman Obat Herbal", date: "02-10-26", icon: "💻", image: "galeri/Kegiatan2.jpg" },
+  { title: "Photo Bersama All Rpl", date: "02-10-26", icon: "🌊", image: "galeri/Kegiatan3.jpg" },
+  { title: "Random", date: "02-10-26", icon: "🌊", image: "galeri/Kegiatan4.jpg" },
+  { title: "Membuat Kompos",date: "15-10-26",icon: "🎬",video: "galeri/kegiatan5.mp4"},
+  { title: "Random",date: "29-10-26",icon: "🎬",video: "galeri/kegiatan6.mp4"},
+  { title: "Solo Song",date: "29-10-26",icon: "🎬",video: "galeri/kegiatan7.mp4"},
+  { title: "Fashion Show",date: "29-10-26",icon: "🎬",video: "galeri/kegiatan8.mp4"},
+  { title: "Monolog",date: "29-10-26",icon: "🎬",video: "galeri/kegiatan9.mp4"},
+];
+
+const announcements = [
+  {
+    icon: "📚",
+    title: "Persiapan Pembelajaran",
+    date: "Informasi kelas",
+    text: "Siapkan buku dan perlengkapan belajar sesuai jadwal pelajaran."
+  },
+  {
+    icon: "💻",
+    title: "Tugas Produktif RPL",
+    date: "Informasi kelas",
+    text: "Periksa instruksi tugas dan batas pengumpulan dari guru."
+  },
+  {
+    icon: "📢",
+    title: "Informasi Kelas",
+    date: "Informasi kelas",
+    text: "Pantau pengumuman terbaru dari wali kelas dan pengurus."
+  }
+];
+
+const memberGrid = document.getElementById("memberGrid");
+
+members.forEach(member => {
+  const card = document.createElement("article");
+  card.className = "card member reveal";
+
+  const avatar = document.createElement("img");
+  avatar.className = "avatar";
+  avatar.alt = "Foto " + member.name;
+  avatar.loading = "lazy";
+
+  // Foto lokal, misalnya images/siswa1.jpg
+  avatar.src = member.photo || "";
+  avatar.onerror = () => {
+    avatar.style.display = "none";
+    const emoji = document.createElement("div");
+    emoji.className = "avatar";
+    emoji.style.display = "grid";
+    emoji.style.placeItems = "center";
+    emoji.style.fontSize = "34px";
+    emoji.textContent = "👤";
+    card.prepend(emoji);
+  };
+
+  card.appendChild(avatar);
+
+  const name = document.createElement("h3");
+  name.textContent = member.name;
+  card.appendChild(name);
+
+  const role = document.createElement("p");
+  role.textContent = member.role;
+  card.appendChild(role);
+
+  memberGrid.appendChild(card);
+});
+
+const scheduleBody = document.getElementById("scheduleBody");
+
+schedules.forEach(item => {
+  const tr = document.createElement("tr");
+  item.forEach(value => {
+    const td = document.createElement("td");
+    td.textContent = value;
+    tr.appendChild(td);
+  });
+  scheduleBody.appendChild(tr);
+});
+
+
+const galleryGrid = document.getElementById("galleryGrid");
+
+galleries.forEach(item => {
+  const card = document.createElement("article");
+  card.className = "gallery-item reveal";
+
+  const media = document.createElement("div");
+  media.className = "gallery-image";
+  media.style.cssText = "padding:0;overflow:hidden;";
+
+  
+if (item.video) {
+  const video = document.createElement("video");
+  video.src = item.video;
+  video.controls = true;
+  video.preload = "metadata";
+  video.playsInline = true;
+  video.style.cssText =
+    "width:100%;height:180px;object-fit:cover;display:block;background:#061a36;cursor:zoom-in;";
+
+  video.addEventListener("click", () => {
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+
+    let bigVideo = document.getElementById("bigGalleryVideo");
+
+    if (!bigVideo) {
+      bigVideo = document.createElement("video");
+      bigVideo.id = "bigGalleryVideo";
+      bigVideo.controls = true;
+      bigVideo.playsInline = true;
+      bigVideo.style.cssText =
+        "max-width:92vw;max-height:85vh;width:auto;height:auto;";
+      lightbox.appendChild(bigVideo);
+    }
+
+    bigVideo.src = video.src;
+    lightboxImg.style.display = "none";
+    lightbox.classList.add("active");
+    bigVideo.play();
+  });
+
+  media.appendChild(video);
+
+
+  } else if (item.image) {
+    const img = document.createElement("img");
+    img.src = item.image;
+    img.alt = item.title;
+    img.loading = "lazy";
+    img.style.cssText =
+      "width:100%;height:180px;object-fit:cover;display:block;cursor:zoom-in;";
+
+    img.addEventListener("click", () => {
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightboxImg");
+      lightboxImg.src = img.src;
+      lightbox.classList.add("active");
+    });
+
+    media.appendChild(img);
+  } else {
+    media.textContent = item.icon || "📸";
+  }
+
+  const info = document.createElement("div");
+  info.className = "gallery-info";
+
+  const title = document.createElement("h3");
+  title.textContent = item.title;
+
+  const date = document.createElement("p");
+  date.textContent = "📅 " + item.date;
+
+  info.append(title, date);
+  card.append(media, info);
+  galleryGrid.appendChild(card);
+});
+
+const announcementList = document.getElementById("announcementList");
+
+announcements.forEach(item => {
+  const article = document.createElement("article");
+  article.className = "announcement";
+
+  const icon = document.createElement("div");
+  icon.className = "announcement-icon";
+  icon.textContent = item.icon;
+
+  const content = document.createElement("div");
+  const title = document.createElement("h3");
+  title.textContent = item.title;
+
+  const date = document.createElement("time");
+  date.textContent = item.date;
+
+  const description = document.createElement("p");
+  description.textContent = item.text;
+
+  content.append(title, date, description);
+  article.append(icon, content);
+  announcementList.appendChild(article);
+});
+
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+
+menuBtn.addEventListener("click", () => {
+  const open = navLinks.classList.toggle("open");
+  menuBtn.setAttribute("aria-expanded", String(open));
+  menuBtn.textContent = open ? "✕" : "☰";
+});
+
+navLinks.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    menuBtn.setAttribute("aria-expanded", "false");
+    menuBtn.textContent = "☰";
+  });
+});
+
+const revealItems = document.querySelectorAll(".reveal");
+
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  revealItems.forEach(item => observer.observe(item));
+} else {
+  revealItems.forEach(item => item.classList.add("visible"));
+}
+
+const backTop = document.getElementById("backTop");
+
+window.addEventListener("scroll", () => {
+  backTop.hidden = window.scrollY < 400;
+}, { passive: true });
+
+backTop.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+<div class="lightbox" id="lightbox">
+  <span class="close" id="closeLightbox">&times;</span>
+  <img id="lightboxImg" src="" alt="Foto diperbesar">
+</div>
+
+<script>
+document.querySelectorAll(".gallery-item img").forEach(img => {
+  img.style.cursor = "zoom-in";
+  img.addEventListener("click", () => {
+    document.getElementById("lightboxImg").src = img.src;
+    document.getElementById("lightbox").classList.add("active");
+  });
+});
+
+document.getElementById("closeLightbox").addEventListener("click", () => {
+  document.getElementById("lightbox").classList.remove("active");
+});
+
+document.getElementById("lightbox").addEventListener("click", e => {
+  if (e.target.id === "lightbox") {
+    e.currentTarget.classList.remove("active");
+  }
+});
+</script>
+</body>
+</html>
