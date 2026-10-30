@@ -867,18 +867,27 @@ document.querySelectorAll(".gallery-item img").forEach(img => {
   });
 });
 
+function stopAllMedia() {
+  // Hentikan semua sumber suara/video di halaman, bukan hanya video galeri.
+  document.querySelectorAll("video, audio").forEach(media => {
+    media.pause();
+    try {
+      media.currentTime = 0;
+    } catch (error) {}
+  });
+}
+
 function closeLightbox() {
   const lightbox = document.getElementById("lightbox");
   const bigVideo = document.getElementById("bigGalleryVideo");
 
-  // Matikan semua video dan audio saat lightbox ditutup.
-  document.querySelectorAll(".gallery-item video").forEach(video => {
-    video.pause();
-  });
+  stopAllMedia();
 
   if (bigVideo) {
     bigVideo.pause();
+    bigVideo.muted = true;
     bigVideo.removeAttribute("src");
+    bigVideo.querySelectorAll("source").forEach(source => source.removeAttribute("src"));
     bigVideo.load();
   }
 
@@ -887,10 +896,14 @@ function closeLightbox() {
   document.getElementById("lightboxImg").style.display = "block";
 }
 
-document.getElementById("closeLightbox").addEventListener("click", closeLightbox);
+document.getElementById("closeLightbox").addEventListener("click", event => {
+  event.preventDefault();
+  event.stopPropagation();
+  closeLightbox();
+});
 
-document.getElementById("lightbox").addEventListener("click", e => {
-  if (e.target.id === "lightbox") {
+document.getElementById("lightbox").addEventListener("click", event => {
+  if (event.target.id === "lightbox") {
     closeLightbox();
   }
 });
