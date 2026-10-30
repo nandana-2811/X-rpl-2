@@ -500,19 +500,6 @@ footer p { color: #a8bfd4; font-size: 12px; }
       
 <div class="grid gallery" id="galleryGrid"></div>
 
-<div class="grid gallery" style="margin-top:20px">
-  <article class="gallery-item reveal">
-    <video controls preload="metadata" playsinline
-      style="width:100%;display:block">
-      <source src="galeri/kegiatan1.mp4" type="video/mp4">
-      Browser tidak mendukung video.
-    </video>
-    <div class="gallery-info">
-      <h3>Kegiatan Kelas</h3>
-      <p>Kenangan X RPL 2 🌊</p>
-    </div>
-  </article>
-</div>
       <p style="font-size:12px;color:var(--muted);margin-top:15px">Ganti gambar emoji dengan foto kegiatan kelas asli jika tersedia.</p>
     </div>
   </section>
@@ -747,10 +734,14 @@ if (item.video) {
       lightbox.appendChild(bigVideo);
     }
 
-    bigVideo.src = video.src;
+    // Hentikan video kecil agar audio tidak berjalan bersamaan.
+    video.pause();
+    bigVideo.pause();
+    bigVideo.src = video.currentSrc || video.src;
+    bigVideo.currentTime = video.currentTime || 0;
     lightboxImg.style.display = "none";
     lightbox.classList.add("active");
-    bigVideo.play();
+    bigVideo.play().catch(() => {});
   });
 
   media.appendChild(video);
@@ -876,13 +867,31 @@ document.querySelectorAll(".gallery-item img").forEach(img => {
   });
 });
 
-document.getElementById("closeLightbox").addEventListener("click", () => {
-  document.getElementById("lightbox").classList.remove("active");
-});
+function closeLightbox() {
+  const lightbox = document.getElementById("lightbox");
+  const bigVideo = document.getElementById("bigGalleryVideo");
+
+  // Matikan semua video dan audio saat lightbox ditutup.
+  document.querySelectorAll(".gallery-item video").forEach(video => {
+    video.pause();
+  });
+
+  if (bigVideo) {
+    bigVideo.pause();
+    bigVideo.removeAttribute("src");
+    bigVideo.load();
+  }
+
+  lightbox.classList.remove("active");
+  document.getElementById("lightboxImg").src = "";
+  document.getElementById("lightboxImg").style.display = "block";
+}
+
+document.getElementById("closeLightbox").addEventListener("click", closeLightbox);
 
 document.getElementById("lightbox").addEventListener("click", e => {
   if (e.target.id === "lightbox") {
-    e.currentTarget.classList.remove("active");
+    closeLightbox();
   }
 });
 </script>
